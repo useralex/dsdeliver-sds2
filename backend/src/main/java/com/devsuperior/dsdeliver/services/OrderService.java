@@ -44,4 +44,12 @@ public class OrderService {
 		order = repository.save(order);
 		return new OrderDTO(order);
 	}
+
+	@Transactional()
+	public OrderDTO setDelivered(Long id) {
+		Order order = repository.getOne(id); // não vai no BD, instancia objeto gerenciado pelo JPA.
+		order.setStatus(OrderStatus.DELIVERED);
+		order = repository.save(order);
+		return new OrderDTO(order);
+	}
 }
